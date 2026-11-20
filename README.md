@@ -2,6 +2,10 @@
 
 The iPhone app of [box2boxcam](https://github.com/Thibault-GILLARD/box2boxcam-football-vision): it turns an iPhone on a phone gimbal into the cameraman of your amateur football match. Everything runs live on the phone, about 30 times a second.
 
+
+https://github.com/user-attachments/assets/063bcb82-53c0-44c3-a6fe-a5bb95799286
+
+
 ![A real night match filmed with nobody behind the camera](https://github.com/Thibault-GILLARD/box2boxcam-football-vision/raw/main/docs/assets/demo_real_match.gif)
 
 **Status: in development.** It has filmed real matches, but it is a working prototype, not a finished app. The interface is in French for now. Tested on an iPhone 17 with a DJI Osmo Mobile 8P.
@@ -11,6 +15,8 @@ The iPhone app of [box2boxcam](https://github.com/Thibault-GILLARD/box2boxcam-fo
 1. **Find the ball and the players.** Core ML runs the open [box2boxcam ball model](https://huggingface.co/Totorotibo84/box2boxcam-football-ball-detection) (YOLO26s fine-tuned for small balls, 960 px), a stock YOLO26s person detector and YOLO26s-pose on each analysed frame.
 2. **Pick where to film.** A hybrid rule follows the ball while its track is reliable, and falls back on the players (where they stand and where they face) when the ball is lost. People off the pitch are filtered out with a two-tap pitch calibration (tap the foot of each goal).
 3. **Move the gimbal.** The app turns off the gimbal's built-in tracking and drives the motors itself through Apple's [DockKit](https://developer.apple.com/documentation/dockkit), over Bluetooth. It sends pan and tilt **velocities** (`setAngularVelocity`, in rad/s, capped at 0.30 rad/s), updated with each analysis: the further the target is from the centre of the image, the faster the camera turns. A zero command is re-sent every second so the gimbal does not take back control.
+
+
 
 ## What you need
 
