@@ -1,0 +1,11 @@
+.DS_Store
+**/.build/
+**/DerivedData*/
+**/xcuserdata/
+*.xcuserstate
+.venv*/
+__pycache__/
+# Models are fetched by scripts/fetch-models.sh
+PitchLensDockKit/Models/
+*.mlpackage/
+*.pt
