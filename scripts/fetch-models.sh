@@ -8,8 +8,11 @@ venv="$root/.venv-models"
 mkdir -p "$models"
 
 python3 -m venv "$venv"
-# Versions known to export correctly (newer torch breaks coremltools 9.0).
-"$venv/bin/pip" install --quiet huggingface_hub "torch==2.7.1" "torchvision==0.22.1" "ultralytics==8.4.153" "coremltools==9.0"
+# Versions known to export correctly (newer torch breaks coremltools 9.0). numpy is
+# pinned too: coremltools 9.0 fails on numpy >= 2.4 ("only 0-dimensional arrays can be
+# converted to Python scalars"), and the Ultralytics Core ML export asks for <= 2.3.5.
+"$venv/bin/pip" install --quiet huggingface_hub "torch==2.7.1" "torchvision==0.22.1" "ultralytics==8.4.153" "coremltools==9.0" \
+    "numpy>=1.26,<=2.3.5"
 
 "$venv/bin/python" - "$models" <<'PY'
 import shutil, sys
